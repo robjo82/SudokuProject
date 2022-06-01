@@ -1,0 +1,28 @@
+def valid_value(grid, row, col, value):
+    # Check row
+    for i in range(9):
+        if grid[row][i] == value:
+            return False
+    # Check column
+    for i in range(9):
+        if grid[i][col] == value:
+            return False
+    # Check box
+    for i in range(3):
+        for j in range(3):
+            if grid[row-row%3+i][col-col%3+j] == value:
+                return False
+    return True
+
+def grid_generation(grid):
+    for i in range(9):
+        for j in range(9):
+            while grid[i][j] == 0:
+                value = random.randint(1,9)
+                print(value)
+                if valid_value(grid, i, j, value):
+                    grid[i][j] = value
+    return grid
+
+def grid_init(dimension):
+    return [[0 for i in range(dimension)] for j in range(dimension)]
