@@ -1,3 +1,5 @@
+import random
+
 def valid_value(grid, row, col, value):
     # Check row
     for i in range(9):

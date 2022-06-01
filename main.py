@@ -1,13 +1,15 @@
 #SudokuProjects main file.
 import random
+import grids
 
 def print_grid(grid, editable_cells):
-    for row in grid:
-        for col in row:
-            if (row, col) in editable_cells:
-                print('\033[92m', grid[row][col], '\033[0m', end=" ")
+    for i in range(9):
+        for j in range(9):
+            if (i, j) in editable_cells:
+                print('\033[92m', grid[i][j], '\033[0m', end=" ")
             else:
-                print('\033[91m', grid[row][col], '\033[0m', end=" ")
+                print('\033[91m', grid[i][j], '\033[0m', end=" ")
+        print()
 
 def grid_generation(grid, level):
     returned_grid = grid.copy()
@@ -43,20 +45,24 @@ def test_grid(grid):
     return True
 
 def game_loop():
-    grid = 
+    grid_number = random.randint(1,10)
+    grids.grid_creation()
+    startin_grid = grids.SudokuGrid.get_grid(grid_number)
+
+    playing_grid = grid_generation(startin_grid, 1)
+    grid = playing_grid[0]
+    editable_cells = playing_grid[1]
+
+    level = int(input("Enter difficulty level (1-10): "))
     print_grid(grid, editable_cells)
     while not test_grid(grid):
         row = int(input("Enter row: "))
         col = int(input("Enter column: "))
         value = int(input("Enter value: "))
-        if test_value(grid, row, col, value):
+        if value in editable_cells and test_value(grid, row, col, value):
             grid[row][col] = value
         else:
             print("Invalid value")
     print("You win!")
 
-
-
-
-
-print_grid(grid_generation(grid_init(9)))
+game_loop()
