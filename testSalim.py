@@ -80,7 +80,7 @@ def main():
 
             if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                     pos = pygame.mouse.get_pos()
-                    insert(screen, (pos//50,pos//50))
+                    insert(screen, (pos[0]//50,pos[1]//50))
 
             if event.type == pygame.QUIT:
                 running = False
