@@ -38,14 +38,14 @@ def insert(screen, position):
                     #2. edit
                     if(event.key ==48): #checking with 0
                         grid[i-1][j-1] = event.key - 48
-                        pygame.draw.rect(screen, background_color, (position[0]*50 + buffer, position[1]*50 + buffer,50 - buffer,50 - buffer))
+                        pygame.draw.rect(screen, background_color, (position[0]*50 + buffer, position[1]*50 + buffer,50 - 2*buffer,50 - 2*buffer))
                         pygame.display.update()
                         return
                     #3. adding digits to the grid
                     if(1 < event.key - 48 < 10) : #Checking for valid input
-                        pygame.draw.rect(screen, background_color, (position[0]*50 + buffer, position[1]*50 + buffer,50 - buffer,50 - buffer))
-                        value = screen.render(str(event.key-48), True, (0,0,0))
-                        screen.blit(value, (position[0]*50+15, position[1]*50))
+                        pygame.draw.rect(screen, background_color, (position[0]*50 + buffer, position[1]*50 + buffer,50 - 2*buffer,50 - 2*buffer))
+                        value = font.render(str(event.key-48), True, (50, 30, 150))
+                        screen.blit(value, (position[0]*50+18, position[1]*50+15))
                         grid[i-1][j-1] = event.key - 48
                         pygame.display.update()
                         return
