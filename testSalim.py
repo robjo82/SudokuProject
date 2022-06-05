@@ -9,7 +9,19 @@ background_color = (255, 255, 255)
 added_element_color = (50, 30, 150)
 buffer = 5
 
-grid = [
+grid_completed = [
+    [2,9,4,3,5,7,8,1,6],
+    [3,5,7,8,1,6,9,2,4],
+    [8,1,6,9,2,4,5,3,7],
+    [5,7,9,6,3,8,1,4,2],
+    [4,3,1,5,7,2,6,8,9],
+    [6,2,8,4,9,1,7,5,3],
+    [1,4,5,2,6,3,9,7,8],
+    [9,6,3,7,8,5,2,4,1],
+    [7,8,2,1,4,9,3,6,5]
+]
+
+grid_original = [
     [0,3,9,6,7,8,4,2,1],
     [6,7,2,1,9,5,3,4,8],
     [1,4,8,3,5,2,9,7,6],
@@ -20,6 +32,9 @@ grid = [
     [4,9,5,7,1,3,6,8,2],
     [2,8,6,5,4,9,7,1,0]
 ]
+
+grid = grid_original
+
 
 def insert(screen, position):
         font = pygame.font.SysFont("Inter", 35)
@@ -33,19 +48,21 @@ def insert(screen, position):
                     quit()
                 if event.type == pygame.KEYDOWN:
                     #1. tries to edit the original grid
-                    if (grid[i-1][j-1] != 0):
+                    if (grid_original[i-1][j-1] != 0):
                        return
                     #2. edit
-                    if(event.key ==48): #checking with 0
-                        grid[i-1][j-1] = event.key - 48
-                        pygame.draw.rect(screen, background_color, (position[0]*50 + buffer, position[1]*50 + buffer,50 - buffer,50 - buffer))
+                    if(event.key == 48): #checking with 0
+                        pygame.draw.rect(screen, background_color, (position[0]*50 + buffer, position[1]*50 + buffer,50 - 2*buffer,50 - 2*buffer))
+                        value = font.render(str(event.key-48), True, (50, 30, 150))
+                        screen.blit(value, (position[0]*50+18, position[1]*50+15))
+                        grid[i-1][j-1] = 0
                         pygame.display.update()
                         return
                     #3. adding digits to the grid
                     if(1 < event.key - 48 < 10) : #Checking for valid input
-                        pygame.draw.rect(screen, background_color, (position[0]*50 + buffer, position[1]*50 + buffer,50 - buffer,50 - buffer))
-                        value = screen.render(str(event.key-48), True, (0,0,0))
-                        screen.blit(value, (position[0]*50+15, position[1]*50))
+                        pygame.draw.rect(screen, background_color, (position[0]*50 + buffer, position[1]*50 + buffer,50 - 2*buffer,50 - 2*buffer))
+                        value = font.render(str(event.key-48), True, (50, 30, 150))
+                        screen.blit(value, (position[0]*50+18, position[1]*50+15))
                         grid[i-1][j-1] = event.key - 48
                         pygame.display.update()
                         return
