@@ -51,11 +51,17 @@ def insert(screen, position):
                     if (grid_original[i-1][j-1] != 0):
                        return
                     #2. edit
+<<<<<<< HEAD
                     if(event.key == 48): #checking with 0
                         pygame.draw.rect(screen, background_color, (position[0]*50 + buffer, position[1]*50 + buffer,50 - 2*buffer,50 - 2*buffer))
                         value = font.render(str(event.key-48), True, (50, 30, 150))
                         screen.blit(value, (position[0]*50+18, position[1]*50+15))
                         grid[i-1][j-1] = 0
+=======
+                    if(event.key ==48): #checking with 0
+                        grid[i-1][j-1] = event.key - 48
+                        pygame.draw.rect(screen, background_color, (position[0]*50 + buffer, position[1]*50 + buffer,50 - 2*buffer,50 - 2*buffer))
+>>>>>>> 029c3efa9ac0eb83a70833a62f2439e826769c7a
                         pygame.display.update()
                         return
                     #3. adding digits to the grid
@@ -97,7 +103,7 @@ def main():
 
             if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                     pos = pygame.mouse.get_pos()
-                    insert(screen, (pos//50,pos//50))
+                    insert(screen, (pos[0]//50,pos[1]//50))
 
             if event.type == pygame.QUIT:
                 running = False
